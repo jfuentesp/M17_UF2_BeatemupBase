@@ -1,0 +1,46 @@
+- Cosas a arreglar según revisión del Hector:
+
+	[SOLUCIONADO: El error era por que las instancias del Spawner, gamemanager, en el script de la GUI, se asignaban en el Start().
+	Pese a que puede ser correcto y es un tema de orden de objetos, se ha asignado las Instancias en la funcion UpdateGUI() y funciona.
+	Se ha convertido GameEventVoid en un GameEvent normal no genérico. Se han eliminado todos los GameEvents inservibles y clasificados
+	en carpetas																]
+	- La gui puede ser un solo evento que te actualice todos los valores de la GUI a la vez, y que se llame desde el gamemanager
+	tal y como pensaba que era terrorismo pero no es terrorismo, por que se tiene que actualizar primero el gamemanager y luego
+	reflejar esos datos actualizados en la GUI. Máquina que eres.
+
+	-------------------------	
+	
+	- Los daños pueden ir todos en un mismo script (hitboxinfo, damageinfo), incluidos proyectiles, además del proyectilbehavior
+	enemy behavior y tal. De esa manera, se puede controlar la colision del daño en los enemigos/players directamente con un OR
+	en lugar de varios IF.
+
+	- Los layers se pueden optimizar. Los layers son limitados, por tanto, es bueno pensar de manera abstracta si es necesario
+	hacer ese layer. El truco es que en realidad un único layer es necesario para interactuar con el player. Solo hay que añadir
+	mas layers cuando quieres que esos layers que interactuan con el player NO interactuen entre ellos.
+
+	- Los enemigos pueden heredar con abstract o composición con requirecomponents. El requirecomponents es parecido a lo que tenia en mente al
+	principio. Haces un único script enemigo y le habilitas o deshabilitas componentes (otros scripts) según los necesites. 
+	Por ejemplo: enemigo que dispara requerirá el componente disparable. Si patrulla, requerirá el componente patrulla. 
+	Si salta... Si huye... si... etc. (es interesante ver herencia VS composición)
+	https://devexpert.io/herencia-vs-composicion/
+	------------------------------------
+
+	[CORREGIDO: Los pickups ya funcionan en el UpdateState de Crouch con CircleCast. Circlecast funciona como un RayCast, solo que en lugar
+	de ser un rayo es un círculo del tamaño que tu le digas que puede recorrer una distancia (o no)					]
+
+	- Los pickups pueden utilizar un elemento Physics2D.CircleCast, que retornará el primer object contra el que colisiones de
+	la layer indicada (en este caso el pickup). También existe el CircleCastAll que te retorna un array de todo lo que detecta
+	y ya lo controlas tu luego a manita. Esto hará que en lugar de comprobarlo en un ontriggerstay, lo controlará en el update
+	del crouch de la maquina de estados. (State crouch dentro de UpdateState).
+	--------------------------------------
+
+	- Funciones como el flipped, y cosas que se repiten se pueden hacer en funciones específicas cortas para no repetir 
+	tanto código.
+
+	- Organizar un poco mejor la carpeta de assets (scripts, gameevents, scriptables y tal)
+
+	- SI se quiere hacer el uso de effectors que influyen al personaje, el personaje tendrá que moverse por fuerzas (addforce).
+	La manera de hacerlo es hacer que se le vaya añadiendo una fuerza hasta clampearlo en la velocidad deseada. De esa manera,
+	se consigue un efecto de aceleración, se empieza corriendo a una velocidad y se va incrementando (rollo sonic).
+
+

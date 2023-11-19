@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 376bf6837b889f043bb6c9cee2ba0871, type: 3}
+  m_Name: PickupCoins
+  m_EditorClassIdentifier: 
+  m_PickupID: 0
+  m_PickupName: coins
+  m_PickupValue: 100
+  m_PickupEffectDuration: 0
+  m_PickupColor: {r: 1, g: 1, b: 1, a: 1}
+  m_PickupSprite: {fileID: 596144051, guid: b320294e10874024b8abe736c3b127ca, type: 3}
